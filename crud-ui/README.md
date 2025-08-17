@@ -1,70 +1,148 @@
-# Getting Started with Create React App
+CRUD API with Spring Boot, MongoDB & Kafka
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a full-stack backend application that demonstrates how to build a CRUD (Create, Read, Update, Delete) API using Spring Boot with MongoDB as the database and Apache Kafka for event-driven messaging.
+It follows a clean layered architecture with Controller → Service → Repository and integrates Kafka for producing and consuming events on CRUD operations.
 
-## Available Scripts
 
-In the project directory, you can run:
+---
 
-### `npm start`
+🚀 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+CRUD Operations: Create, read, update, and delete records via RESTful APIs.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+MongoDB Integration: Uses Spring Data MongoDB for seamless database operations.
 
-### `npm test`
+Event-Driven Architecture: Publishes Kafka events on data changes (e.g., when a record is created or updated).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Kafka Consumer: Listens to Kafka topics for processing or logging events.
 
-### `npm run build`
+Layered Architecture: Follows Controller → Service → Repository structure for maintainability.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Configuration Management: Centralized config/ package for Kafka and other app-level settings.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+🛠 Tech Stack
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Java 17
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Spring Boot 3
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Spring Web (REST APIs)
 
-## Learn More
+Spring Data MongoDB
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Spring Kafka
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Lombok
 
-### Code Splitting
+Maven
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+⚙️ Installation & Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. Clone the repository
 
-### Advanced Configuration
+git clone https://github.com/AndDevil/crud-kafka.git  
+cd crud-kafka  
+  
+2. Configure MongoDB  
+  
+Update your application.properties file with MongoDB connection details:  
+  
+spring.data.mongodb.uri=mongodb://localhost:27017/cruddb  
+spring.kafka.bootstrap-servers=localhost:9092  
+  
+3. Run Kafka & MongoDB  
+  
+Make sure Kafka and MongoDB are running locally:  
+  
+# Start Zookeeper  
+bin/zookeeper-server-start.sh config/zookeeper.properties  
+  
+# Start Kafka  
+bin/kafka-server-start.sh config/server.properties  
+  
+# Start MongoDB  
+mongod  
+  
+4. Run the Application  
+  
+mvn spring-boot:run  
+  
+  
+---  
+  
+📡 API Endpoints  
+  
+Method	Endpoint	Description  
+  
+POST	/api/items	Create new item  
+GET	/api/items	Get all items  
+PUT	/api/items/{id}	Update item by ID  
+DELETE	/api/items/{id}	Delete item by ID  
+  
+  
+All actions produce Kafka events to notify other services or log changes.  
+  
+  
+---  
+  
+📝 Example Item JSON  
+  
+{  
+  "name": "Laptop",  
+  "quantity": 5  
+}  
+  
+  
+---  
+  
+🔔 Event Flow  
+  
+1. API request triggers a Controller.  
+  
+  
+2. Controller calls Service to handle business logic.  
+  
+  
+3. Service updates MongoDB via Repository.  
+  
+  
+4. Service publishes an event to Kafka (e.g., item-created).  
+  
+  
+5. Kafka Consumer listens and processes/logs the event.  
+  
+  
+  
+  
+---  
+  
+🤝 Contributing  
+  
+Contributions are welcome! Feel free to open issues or submit PRs.  
+  
+  
+---  
+  
+📄 License  
+  
+This project is licensed under the MIT License.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+👨‍💻 Author
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Shrish Kumar
+
+GitHub: AndDevil
+
+LinkedIn: Shrish Kumar
