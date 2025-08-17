@@ -1,70 +1,154 @@
-# Getting Started with Create React App
+# 📦 CRUD API with Spring Boot, MongoDB & Kafka
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a **backend application** that demonstrates how to build a **CRUD (Create, Read, Update, Delete) API** using **Spring Boot**, with **MongoDB** as the database and **Apache Kafka** for event-driven messaging.
 
-## Available Scripts
+It follows a clean layered architecture:  
+**Controller → Service → Repository**  
+and integrates Kafka to publish and consume events on CRUD operations.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Features
+- **CRUD Operations** – Create, read, update, and delete records via REST APIs.
+- **MongoDB Integration** – Powered by Spring Data MongoDB for seamless database handling.
+- **Event-Driven Architecture** – Publishes Kafka events on record changes (create/update/delete).
+- **Kafka Consumer** – Listens to topics and processes/logs events.
+- **Layered Architecture** – Clean separation of concerns with Controller → Service → Repository.
+- **Centralized Config** – Easy configuration for Kafka, MongoDB, and app-level settings.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠 Tech Stack
+- **Java 17**
+- **Spring Boot 3** (Web, Data MongoDB, Kafka)
+- **Apache Kafka**
+- **MongoDB**
+- **Lombok**
+- **Maven**
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## ⚙️ Installation & Setup
+Perfect, Shrish 👍
+Here’s a fresh rewrite of your README from ## ⚙️ Installation & Setup to the end, so you can drop it into a new .md file if you want a shorter version focusing on setup and usage.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## ⚙️ Installation & Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 1. Clone the Repository
+```bash
+git clone https://github.com/AndDevil/crud-kafka.git
+cd crud-kafka
 
-### `npm run eject`
+2. Configure MongoDB & Kafka
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Add your MongoDB and Kafka configurations in application.properties:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+spring.data.mongodb.uri=mongodb://localhost:27017/cruddb
+spring.kafka.bootstrap-servers=localhost:9092
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Start Required Services
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Make sure both Kafka and MongoDB are running before starting the app:
 
-## Learn More
+# Start Zookeeper
+bin/zookeeper-server-start.sh config/zookeeper.properties
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Start Kafka
+bin/kafka-server-start.sh config/server.properties
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Start MongoDB
+mongod
 
-### Code Splitting
+4. Run the Application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+mvn spring-boot:run
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+📡 API Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Method	Endpoint	Description
 
-### Advanced Configuration
+POST	/api/items	Create a new item
+GET	/api/items	Fetch all items
+PUT	/api/items/{id}	Update an item
+DELETE	/api/items/{id}	Delete an item
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+👉 Every CRUD action also triggers a Kafka event that can be consumed for logging, monitoring, or extending functionality.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+📝 Sample Request
+
+{
+  "name": "Laptop",
+  "quantity": 5
+}
+
+
+---
+
+🔔 How It Works
+
+1. Client sends an HTTP request to a Controller.
+
+
+2. The Controller delegates processing to a Service.
+
+
+3. The Service interacts with MongoDB through a Repository.
+
+
+4. After database action, the Service publishes an event to Kafka.
+
+
+5. A Kafka Consumer listens to the event and processes/logs it.
+
+
+
+
+---
+
+🤝 Contributing
+
+Contributions are always welcome 🎉
+
+Steps to contribute:
+
+1. Fork this repository
+
+
+2. Create a new feature branch
+
+
+3. Commit your changes
+
+
+4. Open a Pull Request
+
+
+
+
+---
+
+📄 License
+
+This project is licensed under the MIT License.
+
+
+---
+
+👨‍💻 Author
+
+Shrish Kumar
+
+GitHub: AndDevil
+
+LinkedIn: Shrish Kumar
+
