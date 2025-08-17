@@ -29,54 +29,52 @@ and integrates Kafka to publish and consume events on CRUD operations.
 ---
 
 ## ⚙️ Installation & Setup
-Perfect, Shrish 👍
-Here’s a fresh rewrite of your README from ## ⚙️ Installation & Setup to the end, so you can drop it into a new .md file if you want a shorter version focusing on setup and usage.
-
-
----
-
-## ⚙️ Installation & Setup
-
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/AndDevil/crud-kafka.git
 cd crud-kafka
+```
 
-2. Configure MongoDB & Kafka
+
+### 2. Configure MongoDB & Kafka
 
 Add your MongoDB and Kafka configurations in application.properties:
-
+```
 spring.data.mongodb.uri=mongodb://localhost:27017/cruddb
 spring.kafka.bootstrap-servers=localhost:9092
+```
 
-3. Start Required Services
+### 3. Start Required Services
 
 Make sure both Kafka and MongoDB are running before starting the app:
 
-# Start Zookeeper
-bin/zookeeper-server-start.sh config/zookeeper.properties
+ **Start Zookeeper**
+```bin/zookeeper-server-start.sh config/zookeeper.properties```
 
-# Start Kafka
-bin/kafka-server-start.sh config/server.properties
+ **Start Kafka**
+```bin/kafka-server-start.sh config/server.properties```
 
-# Start MongoDB
-mongod
+ **Start MongoDB**
+```mongod```
 
-4. Run the Application
 
-mvn spring-boot:run
+### 4. Run the Application
+
+```mvn spring-boot:run```
 
 
 ---
 
-📡 API Endpoints
+## 📡 API Endpoints
 
 Method	Endpoint	Description
 
+```
 POST	/api/items	Create a new item
 GET	/api/items	Fetch all items
 PUT	/api/items/{id}	Update an item
 DELETE	/api/items/{id}	Delete an item
+```
 
 
 👉 Every CRUD action also triggers a Kafka event that can be consumed for logging, monitoring, or extending functionality.
@@ -84,17 +82,19 @@ DELETE	/api/items/{id}	Delete an item
 
 ---
 
-📝 Sample Request
+## 📝 Sample Request
 
+```
 {
   "name": "Laptop",
   "quantity": 5
 }
+```
 
 
 ---
 
-🔔 How It Works
+## 🔔 How It Works
 
 1. Client sends an HTTP request to a Controller.
 
@@ -115,7 +115,7 @@ DELETE	/api/items/{id}	Delete an item
 
 ---
 
-🤝 Contributing
+## 🤝 Contributing
 
 Contributions are always welcome 🎉
 
@@ -137,18 +137,15 @@ Steps to contribute:
 
 ---
 
-📄 License
+## 📄 License
 
 This project is licensed under the MIT License.
 
 
 ---
 
-👨‍💻 Author
-
-Shrish Kumar
-
-GitHub: AndDevil
-
-LinkedIn: Shrish Kumar
+## 👨‍💻 Author
+**Shrish Kumar**  
+- GitHub: [AndDevil](https://github.com/AndDevil)  
+- LinkedIn: [Shrish Kumar](https://www.linkedin.com/in/shrish-k-83821212a/)
 
